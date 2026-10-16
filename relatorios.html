@@ -1,0 +1,30 @@
+{% extends "app_base.html" %}
+{% block title %}Relatórios · Caixa Fácil{% endblock %}
+{% block topbar_title %}Relatórios{% endblock %}
+{% block topbar_subtitle %}Análises e exportações financeiras{% endblock %}
+{% block page_content %}
+<div class="page-shell reports-page">
+  <section class="report-grid three-column" aria-label="Tipos de relatório">
+    <article class="report-card" data-report-card="fluxo">
+      <div class="report-card-top"><div class="stat-icon revenue"><i data-lucide="refresh-ccw"></i></div><span class="stat-badge neutral">Mensal</span></div>
+      <div class="report-copy"><h3>Fluxo de caixa</h3><p>Resumo mensal das entradas, saídas e resultado do período.</p></div>
+      <div class="field"><label for="reportFluxMonth">Mês/Ano</label><select class="select" id="reportFluxMonth" data-report-period="fluxo" data-report-period-kind="month" required><option value="{{ mes_atual }}">Mês atual</option></select></div>
+      <div class="report-actions"><button class="button button-secondary" type="button" data-generate-report="fluxo" data-report-format="CSV"><i data-lucide="file-spreadsheet"></i>CSV</button><button class="button button-primary" type="button" data-generate-report="fluxo" data-report-format="PDF"><i data-lucide="file-text"></i>PDF</button></div>
+    </article>
+
+    <article class="report-card" id="relatorio-livro" data-report-card="livro">
+      <div class="report-card-top"><div class="stat-icon revenue"><i data-lucide="book-open-text"></i></div><span class="stat-badge neutral">Anual</span></div>
+      <div class="report-copy"><h3>Livro caixa</h3><p>Relação cronológica anual com saldo e histórico dos lançamentos.</p></div>
+      <div class="field"><label for="reportBookYear">Ano</label><select class="select" id="reportBookYear" data-report-period="livro" data-report-period-kind="year" required><option value="{{ ano_atual }}">{{ ano_atual }}</option></select></div>
+      <div class="report-actions"><button class="button button-secondary" type="button" data-generate-report="livro" data-report-format="CSV"><i data-lucide="file-spreadsheet"></i>CSV</button><button class="button button-primary" type="button" data-generate-report="livro" data-report-format="PDF"><i data-lucide="file-text"></i>PDF</button></div>
+    </article>
+
+    <article class="report-card" data-report-card="banco">
+      <div class="report-card-top"><div class="stat-icon revenue"><i data-lucide="landmark"></i></div><span class="stat-badge neutral">Mensal</span></div>
+      <div class="report-copy"><h3>Movimentação bancária</h3><p>Extrato mensal detalhado do Banco Geral.</p></div>
+      <div class="report-fields"><div class="field" hidden><label for="reportBank">Banco</label><select class="select" id="reportBank" data-report-bank required><option value="">Carregando bancos…</option></select></div><div class="field"><label for="reportBankMonth">Mês/Ano</label><select class="select" id="reportBankMonth" data-report-period="banco" data-report-period-kind="month" required><option value="{{ mes_atual }}">Mês atual</option></select></div></div>
+      <div class="report-actions"><button class="button button-secondary" type="button" data-generate-report="banco" data-report-format="CSV"><i data-lucide="file-spreadsheet"></i>CSV</button><button class="button button-primary" type="button" data-generate-report="banco" data-report-format="PDF"><i data-lucide="file-text"></i>PDF</button></div>
+    </article>
+  </section>
+</div>
+{% endblock %}

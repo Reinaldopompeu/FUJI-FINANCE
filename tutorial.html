@@ -1,0 +1,12 @@
+<dialog class="tutorial-dialog" id="tutorialDialog" aria-labelledby="tutorialTitle" aria-describedby="tutorialMessage" data-user="{{ usuario_atual.id if usuario_atual else 'demo' }}">
+  <header class="tutorial-header"><span id="tutorialProgress">Guia rápido</span><button class="icon-button" type="button" data-tour-close aria-label="Fechar tutorial"><i data-lucide="x" aria-hidden="true"></i></button></header>
+  <h2 id="tutorialTitle">Conheça o Caixa Fácil</h2>
+  <p id="tutorialMessage">Pratique em quatro passos. Os dados são só de demonstração e não alteram seu caixa.</p>
+  <footer class="tutorial-actions"><button class="button button-secondary" type="button" data-tour-back>Agora não</button><button class="button button-primary" type="button" data-tour-next>Começar</button></footer>
+  <ol hidden id="tutorialSteps">
+    <li data-url="{{ url_for('pagina_configuracoes') }}" data-target="[data-settings-target='saldo-inicial']" data-action="settings:saldo-inicial" data-title="1. Saldo inicial">Demonstração: siga os campos em amarelo. Informe quanto você já tinha e toque em Salvar saldo inicial. Se estiver começando do zero, salve R$ 0,00.</li>
+    <li data-url="{{ url_for('pagina_configuracoes') }}" data-target="[data-settings-target='categorias']" data-action="categoryCreateForm" data-title="2. Crie uma categoria">Escolha Entrada ou Saída, dê um nome à categoria e toque em Adicionar. Exemplo: Entrada → Salário.</li>
+    <li data-url="{{ url_for('pagina_configuracoes') }}" data-target="[data-settings-target='objetivo']" data-action="settings:objetivo" data-title="3. Defina seu objetivo">Informe o valor total que deseja juntar e toque em Salvar objetivo.</li>
+    <li data-url="{{ url_for('pagina_lancamentos') }}" data-target="[data-open-transaction]" data-action="transaction" data-title="4. Primeiro lançamento">Preencha data, tipo, valor, categoria e descrição. Confira e toque em Confirmar. Use o mesmo tipo da categoria que você criou.</li>
+  </ol>
+</dialog>

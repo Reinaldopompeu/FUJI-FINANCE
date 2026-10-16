@@ -1,0 +1,67 @@
+{% extends "app_base.html" %} {% block title %}Gráficos · Caixa Fácil{% endblock
+%} {% block topbar_title %}Gráficos{% endblock %} {% block topbar_subtitle
+%}Indicadores e tendências financeiras{% endblock %} {% block page_content %}
+<div class="page-shell charts-page">
+  <section class="toolbar" aria-label="Filtros dos gráficos">
+    <div class="filter-group">
+      <div class="filter-select">
+        <i data-lucide="calendar" aria-hidden="true"></i><span class="sr-only">Período</span><select
+          data-filter="period" data-default-period="year" data-years-only aria-label="Ano da análise">
+          <option value="all">Todo o período</option>
+        </select>
+      </div>
+      <div class="filter-select">
+        <i data-lucide="layout-grid" aria-hidden="true"></i><span class="sr-only">Categoria</span><select
+          data-filter="category_id" aria-label="Filtrar gráficos por categoria">
+          <option value="all">Todas as categorias</option>
+        </select>
+      </div>
+      <div class="filter-select"><i data-lucide="chart-line" aria-hidden="true"></i><span class="sr-only">Visualização</span><select id="chartStyle" aria-label="Tipo de gráfico"><option value="line">Linhas</option><option value="pie">Setores</option><option value="bar">Barras</option><option value="histogram">Histograma</option></select></div>
+    </div>
+  </section>
+
+  <section class="stats-grid stats-grid-four" aria-label="Indicadores do período">
+    <article class="stat-card stat-card-income">
+      <div class="stat-header">
+        <div class="stat-icon income"><i data-lucide="trending-up"></i></div>
+        <span class="stat-label">Receita média</span>
+      </div>
+      <strong class="stat-value" data-stat="average-income">R$ 0</strong>
+    </article>
+    <article class="stat-card stat-card-expense">
+      <div class="stat-header">
+        <div class="stat-icon expense"><i data-lucide="trending-down"></i></div>
+        <span class="stat-label">Despesa média</span>
+      </div>
+      <strong class="stat-value" data-stat="average-expense">R$ 0</strong>
+    </article>
+    <article class="stat-card stat-card-margin">
+      <div class="stat-header">
+        <div class="stat-icon revenue"><i data-lucide="badge-percent"></i></div>
+        <span class="stat-label">Margem operacional</span>
+      </div>
+      <strong class="stat-value" data-stat="margin">0%</strong>
+    </article>
+    <article class="stat-card stat-card-warning">
+      <div class="stat-header">
+        <div class="stat-icon warning">
+          <i data-lucide="calendar-check-2"></i>
+        </div>
+        <span class="stat-label">Melhor mês</span>
+      </div>
+      <strong class="stat-value" data-stat="best-month">—</strong>
+    </article>
+  </section>
+
+  <section class="dashboard-card chart-card-spaced">
+    <div class="card-header">
+      <div>
+        <span class="card-eyebrow">Análise selecionada</span>
+        <h2 id="chartTitle">Entradas x Saídas</h2>
+        <p>Visualização consolidada de acordo com os filtros selecionados.</p>
+      </div>
+    </div>
+    <div id="analysisChart" class="chart chart-xl" role="img" aria-label="Gráfico financeiro selecionado"></div>
+  </section>
+</div>
+{% endblock %}

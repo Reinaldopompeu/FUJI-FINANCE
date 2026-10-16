@@ -1,0 +1,5 @@
+{% extends "app_base.html" %}
+{% block title %}Página não encontrada · Caixa Fácil{% endblock %}
+{% block topbar_title %}Página não encontrada{% endblock %}
+{% block topbar_subtitle %}O endereço solicitado não existe{% endblock %}
+{% block page_content %}<div class="page-shell"><section class="empty-page"><i data-lucide="map-pin-off" aria-hidden="true"></i><h2>Não encontramos esta página!</h2><p>Use o menu para continuar navegando ou volte ao dashboard.</p><a class="button button-primary" href="{{ url_for('index') }}">Voltar ao dashboard</a></section></div>{% endblock %}

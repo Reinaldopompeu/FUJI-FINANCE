@@ -1,0 +1,104 @@
+/* Layout exclusivo de configurações; não interfere nos demais formulários. */
+.settings-page { width: 100%; max-width: 1240px; margin-inline: auto; }
+.settings-page .settings-stack { gap: 32px; }
+.settings-page [hidden] { display: none !important; }
+.settings-home { display: grid; gap: 28px; }
+.settings-home-header h2,
+.settings-panel-header h2 { margin: 0; color: var(--ui-text); font-size: clamp(24px, 3vw, 32px); font-weight: 500; line-height: 1.25; letter-spacing: -.02em; }
+.settings-home-header p,
+.settings-panel-header p { margin: 7px 0 0; color: var(--ui-text-muted); font-size: 15px; line-height: 1.5; }
+.settings-option-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.settings-option-card { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 16px; min-height: 142px; padding: 24px; border: 1px solid var(--ui-border); border-radius: 22px; background: var(--md-sys-color-surface-container-lowest); color: var(--ui-text); text-align: left; cursor: pointer; transition: border-color var(--ui-transition), background var(--ui-transition), box-shadow var(--ui-transition), transform var(--ui-transition); }
+.settings-option-card:hover { border-color: var(--ui-primary); background: var(--ui-primary-soft); box-shadow: 0 8px 24px rgba(15, 23, 42, .07); transform: translateY(-2px); }
+.settings-option-card:focus-visible { outline: 3px solid color-mix(in srgb, var(--ui-primary) 28%, transparent); outline-offset: 3px; }
+.settings-option-icon { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 15px; background: var(--ui-primary-soft); color: var(--ui-primary); }
+.settings-option-copy { display: grid; gap: 7px; min-width: 0; }
+.settings-option-copy strong { font-size: 17px; font-weight: 600; line-height: 1.3; }
+.settings-option-copy small { color: var(--ui-text-muted); font-size: 13px; line-height: 1.45; }
+.settings-option-arrow { color: var(--ui-text-dimmed); }
+.settings-panel { display: grid; gap: 22px; animation: settings-panel-in .2s ease-out; }
+.settings-panel-header { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 18px; }
+.settings-back { align-self: center; padding-inline: 12px; }
+@keyframes settings-panel-in { from { opacity: 0; transform: translateX(8px); } to { opacity: 1; transform: translateX(0); } }
+.settings-page .catalog-create-grid > .full { grid-column: 1 / -1; }
+.subcategory-management { border-top: 1px solid var(--ui-border); }
+.subcategory-management > summary { cursor: pointer; padding: 20px 24px; font-weight: 500; color: var(--ui-primary); }
+.subcategory-management > summary:focus-visible { outline: 2px solid var(--ui-primary); outline-offset: -4px; }
+.field-optional { font-weight: 400; color: var(--ui-text-dimmed); }
+.settings-page .settings-catalogs { gap: 24px; }
+.settings-page .settings-section-header { padding: 0 4px 16px; }
+.settings-page .catalog-header,
+.settings-page .form-section-header { padding: 24px; min-height: 88px; }
+.settings-page .catalog-header h4 { font-size: 20px; line-height: 28px; font-weight: 500; }
+.settings-page .catalog-header > div:first-child { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.settings-page .settings-fixed-category { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 8px; background: var(--ui-primary-soft); color: var(--ui-primary); font-size: 12px; font-weight: 500; }
+.settings-fixed-category svg { width: 16px; height: 16px; }
+.settings-page .bank-summary { flex-wrap: wrap; justify-content: flex-end; gap: 20px; }
+.settings-page .bank-summary > span:not(.count-badge) { font-size: 12px; }
+.settings-page .bank-summary strong { font-size: 16px; font-weight: 500; }
+.settings-page .company-fields { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
+.settings-page .settings-fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+.settings-page .settings-fieldset legend { float: none; width: 100%; padding: 0 0 16px; font-size: 14px; font-weight: 500; color: var(--ui-primary); }
+.settings-page .settings-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.settings-page .address-fields { grid-template-columns: minmax(0, 1fr) 140px; }
+.settings-page .company-fields > .form-feedback:empty { display: none; }
+.settings-page .catalog-create-grid { display: grid; grid-template-columns: minmax(180px, 1fr) minmax(240px, 2fr) 80px; gap: 20px; align-items: start; padding: 24px; }
+.settings-page .bank-create-grid { grid-template-columns: minmax(240px, 2fr) minmax(180px, 1fr) 80px; }
+.settings-page .subcategory-create { grid-template-columns: minmax(200px, 1fr) minmax(240px, 1.5fr); }
+.settings-page .catalog-create-grid > input[type="hidden"] { display: none; }
+.settings-page .catalog-create-grid .field { display: flex; flex-direction: column; min-width: 0; gap: 8px; }
+.settings-page .catalog-create-grid .field label { min-height: 20px; padding: 0; }
+.settings-page .catalog-create-grid .input,
+.settings-page .catalog-create-grid .dropdown,
+.settings-page .catalog-create-grid .select { width: 100%; min-width: 0; max-width: 100%; }
+.settings-page .catalog-create-grid .color-input { height: 56px; padding: 8px; cursor: pointer; }
+.settings-page .color-input::-webkit-color-swatch-wrapper { padding: 0; }
+.settings-page .color-input::-webkit-color-swatch { border: 0; border-radius: 4px; }
+.settings-page .color-input::-moz-color-swatch { border: 0; border-radius: 4px; }
+.settings-page .settings-create-actions { display: flex; justify-content: flex-end; grid-column: 1 / -1; padding-top: 4px; }
+.settings-page .settings-create-actions .button { width: auto; min-width: 140px; }
+.settings-page .catalog-empty { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 12px; min-height: 132px; padding: 24px; font-size: 14px; }
+.settings-page .catalog-empty svg { width: 28px; height: 28px; color: var(--ui-text-dimmed); }
+.settings-page .catalog-row { flex-wrap: wrap; padding: 16px 24px; gap: 16px; }
+.settings-page .catalog-identity { min-width: min(200px, 100%); }
+.settings-page .catalog-identity strong { white-space: normal; overflow-wrap: anywhere; line-height: 20px; }
+.settings-page .bank-row-balances { flex-wrap: wrap; gap: 16px; }
+.settings-page .catalog-subgroup-header { padding: 16px 24px; background: var(--md-sys-color-surface-container-low); }
+@media (max-width: 1100px) {
+  .settings-option-grid { grid-template-columns: minmax(0, 1fr); }
+  .settings-option-card { min-height: 112px; }
+  .settings-page .catalog-create-grid,
+  .settings-page .bank-create-grid,
+  .settings-page .subcategory-create { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .settings-page .catalog-create-grid .color-field { width: 80px; }
+}
+@media (max-width: 600px) {
+  .settings-home { gap: 22px; }
+  .settings-option-grid { gap: 12px; }
+  .settings-option-card { min-height: 100px; padding: 18px; border-radius: 18px; }
+  .settings-option-icon { width: 46px; height: 46px; }
+  .settings-panel-header { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .settings-panel-header .settings-back { justify-self: start; }
+  .settings-panel-header h2 { font-size: 24px; }
+  .settings-page .catalog-create-grid,
+  .settings-page .bank-create-grid,
+  .settings-page .subcategory-create,
+  .settings-page .settings-fields { grid-template-columns: minmax(0, 1fr); }
+  .settings-page .address-fields { grid-template-columns: minmax(0, 1fr) 88px; gap: 16px; }
+  .settings-page .catalog-header,
+  .settings-page .form-section-header,
+  .settings-page .catalog-create-grid { padding: 20px; }
+  .settings-page .catalog-header { align-items: flex-start; gap: 16px; }
+  .settings-page .catalog-header-bank { flex-direction: column; }
+  .settings-page .bank-summary { width: 100%; justify-content: flex-start; }
+  .settings-page .bank-summary .count-badge { margin-left: auto; }
+  .settings-page .settings-create-actions .button { width: 100%; }
+  .settings-page .catalog-row { padding: 16px 20px; }
+  .settings-page .bank-row-balances { margin-left: 0; width: 100%; }
+  .settings-page .catalog-actions { margin-left: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .settings-panel { animation: none; }
+}
+
+@media (min-width: 761px) { .settings-option-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

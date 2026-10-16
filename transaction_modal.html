@@ -1,0 +1,79 @@
+<div class="modal-backdrop" id="transactionModal" aria-hidden="true">
+  <section class="modal transaction-modal" role="dialog" aria-modal="true" aria-labelledby="transactionModalTitle">
+    <header class="modal-header transaction-wizard-header">
+      <div>
+        <p class="transaction-step-eyebrow" id="transactionStepLabel">Etapa 1</p>
+        <h2 class="modal-title" id="transactionModalTitle">Novo lançamento</h2>
+      </div>
+      <button class="icon-button" type="button" data-close-modal aria-label="Fechar"><i data-lucide="x" aria-hidden="true"></i></button>
+    </header>
+
+    <form id="transactionForm" class="transaction-form" autocomplete="off" novalidate>
+      <ol class="transaction-progress" aria-label="Etapas do novo lançamento">
+        <li class="is-active" data-step-indicator="1"><span>1</span><small>Dados iniciais</small></li>
+        <li data-step-indicator="2"><span>2</span><small>Detalhes</small></li>
+        <li data-step-indicator="3"><span>3</span><small>Confirmar</small></li>
+      </ol>
+
+      <div class="modal-body transaction-body">
+        <section class="transaction-step" data-transaction-step="type" aria-labelledby="txStepOneTitle">
+          <div class="transaction-step-heading">
+            <h3 id="txStepOneTitle">Selecione o fluxo</h3>
+            <p>Escolha entrada ou saída.</p>
+          </div>
+          <div class="transaction-fields">
+            <div class="field transaction-field-step">
+              <label for="txFlux">Fluxo <span class="required" aria-hidden="true">*</span></label>
+              <select class="select" id="txFlux" name="flow" required>
+                <option value="">Selecione o fluxo</option>
+                <option value="entrada">Entrada</option>
+                <option value="saida">Saída</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <section class="transaction-step" data-transaction-step="data" aria-labelledby="txStepTwoTitle" hidden>
+          <div class="transaction-step-heading">
+            <h3 id="txStepTwoTitle">Dados do lançamento</h3>
+            <p id="txStepTwoDescription">Preencha o campo para continuar.</p>
+          </div>
+          <div class="transaction-fields">
+            <div class="field transaction-field-step" id="txCategoryField" data-field-step="category" hidden><label for="txCategory" id="txCategoryLabel">Categoria <span class="required" aria-hidden="true">*</span></label><select class="select" id="txCategory" required><option value="">Selecione</option></select></div>
+            <div class="field transaction-field-step" id="txOriginBankField" data-field-step="origin-bank" hidden><label for="txOriginBank">Banco de origem <span class="required" aria-hidden="true">*</span></label><select class="select" id="txOriginBank" disabled required><option value="">Selecione</option></select></div>
+            <div class="field transaction-field-step" id="txDestinationBankField" data-field-step="destination-bank" hidden><label for="txDestinationBank">Banco de destino <span class="required" aria-hidden="true">*</span></label><select class="select" id="txDestinationBank" disabled required><option value="">Selecione</option></select></div>
+            <div class="field transaction-field-step" data-field-step="date" hidden><label for="txDate">Data <span class="required" aria-hidden="true">*</span></label><input class="input" id="txDate" name="date" type="date" required /></div>
+            <div class="field transaction-field-step" data-field-step="amount" hidden><label for="txValue">Valor <span class="required" aria-hidden="true">*</span></label><div class="input-money"><span class="currency-symbol" aria-hidden="true">R$</span><input class="input" id="txValue" name="amount" type="text" inputmode="decimal" placeholder="0,00" aria-label="Valor em reais" data-money-input required /></div></div>
+            <div class="field transaction-field-step" data-field-step="description" hidden><label for="txDescription">Descrição <span class="required" aria-hidden="true">*</span></label><input class="input" id="txDescription" name="description" type="text" placeholder="Ex.: Pagamento do fornecedor" minlength="2" maxlength="80" aria-describedby="txDescriptionCount" required /><small class="description-count" id="txDescriptionCount">0 / 80</small></div>
+          </div>
+        </section>
+
+        <section class="transaction-step transaction-review" data-transaction-step="review" aria-labelledby="txStepThreeTitle" hidden>
+          <div class="transaction-step-heading">
+            <h3 id="txStepThreeTitle">Confirmar lançamento</h3>
+            <p>Confira os dados antes de concluir.</p>
+          </div>
+          <dl class="transaction-review-list">
+            <div><dt>Tipo</dt><dd data-review="flow">—</dd></div>
+            <div><dt>Data</dt><dd data-review="date">—</dd></div>
+            <div class="review-highlight"><dt>Valor</dt><dd data-review="amount">—</dd></div>
+            <div data-review-row="category"><dt>Categoria</dt><dd data-review="category">—</dd></div>
+            <div data-review-row="origin-bank"><dt>Banco de origem</dt><dd data-review="origin-bank">—</dd></div>
+            <div data-review-row="destination-bank"><dt>Banco de destino</dt><dd data-review="destination-bank">—</dd></div>
+            <div><dt>Descrição</dt><dd data-review="description">—</dd></div>
+          </dl>
+        </section>
+
+        <p class="form-feedback full" data-form-feedback role="status" aria-live="polite"></p>
+      </div>
+
+      <footer class="modal-footer transaction-wizard-footer">
+        <div class="transaction-step-actions">
+          <button class="button button-secondary" type="button" data-transaction-previous hidden><i data-lucide="arrow-left" aria-hidden="true"></i><span>Voltar</span></button>
+          <button class="button button-primary" type="button" data-transaction-next><span>Continuar</span><i data-lucide="arrow-right" aria-hidden="true"></i></button>
+          <button class="button button-primary" type="submit" data-submit-transaction hidden><i data-lucide="check" aria-hidden="true"></i><span>Confirmar</span></button>
+        </div>
+      </footer>
+    </form>
+  </section>
+</div>

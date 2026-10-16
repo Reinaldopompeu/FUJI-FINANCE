@@ -1,0 +1,13 @@
+{% extends "app_base.html" %}
+{% block title %}Lançamentos · Caixa Fácil{% endblock %}
+{% block topbar_title %}Lançamentos{% endblock %}
+{% block topbar_subtitle %}Entradas e saídas do Banco Geral{% endblock %}
+{% block page_content %}
+<div class="page-shell">
+  <section class="toolbar transactions-toolbar" aria-label="Filtros de lançamentos"><div class="filter-group">
+    <div class="filter-select"><i data-lucide="calendar" aria-hidden="true"></i><span class="sr-only">Período</span><select data-filter="period" data-default-period="all" aria-label="Filtrar por período"><option value="all">Todo o período</option></select></div>
+    <div class="filter-select"><i data-lucide="layout-grid" aria-hidden="true"></i><span class="sr-only">Categoria</span><select data-filter="category_id" aria-label="Filtrar por categoria"><option value="all">Todas as categorias</option></select></div>
+  </div><label class="search-wrapper"><i data-lucide="search" aria-hidden="true"></i><span class="sr-only">Buscar lançamento</span><input id="searchInput" data-filter="search" type="search" placeholder="Buscar lançamento..." autocomplete="off" /><kbd>Alt+K</kbd></label></section>
+  <section class="table-card" aria-labelledby="transactionsTableTitle"><div class="card-header table-card-header"><div><span class="card-eyebrow">Movimentações</span><h2 id="transactionsTableTitle">Lançamentos registrados</h2></div><span class="stat-badge neutral" id="transactionsCount">Carregando…</span></div><div class="table-wrap"><table><thead><tr><th>Data</th><th>Descrição</th><th>Origem</th><th>Entrada</th><th>Saída</th><th>Saldo</th><th class="transaction-actions-heading" scope="col">Ações</th></tr></thead><tbody id="transactionsTableBody"><tr><td colspan="7"><div class="table-empty"><span>Carregando lançamentos…</span></div></td></tr></tbody></table></div><div class="table-footer"><span>O saldo acumulado considera o saldo inicial do Banco Geral.</span><nav class="pagination" id="transactionsPagination" aria-label="Paginação"></nav></div></section>
+</div>
+{% endblock %}

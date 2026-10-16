@@ -1,0 +1,24 @@
+<aside class="sidebar" id="sidebar" aria-label="Navegação principal">
+  <div class="sidebar-header">
+    <div class="brand-icon" aria-hidden="true"><img src="{{ url_for('static', filename='imagens/andes-mark.svg') }}" alt="" /></div>
+    <div class="brand-copy"><h1>Fuji Finance</h1><span>Controle financeiro</span></div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <span class="nav-label">Principal</span>
+    <a class="nav-link {{ 'active' if page_id == 'dashboard' else '' }}" href="{{ url_for('index') }}" {% if page_id == 'dashboard' %}aria-current="page"{% endif %}><i data-lucide="home" aria-hidden="true"></i><span>Início</span></a>
+    <a class="nav-link {{ 'active' if page_id == 'lancamentos' else '' }}" href="{{ url_for('pagina_lancamentos') }}" {% if page_id == 'lancamentos' %}aria-current="page"{% endif %}><i data-lucide="circle-dollar-sign" aria-hidden="true"></i><span>Lançamentos</span></a>
+
+    <span class="nav-label nav-label-settings">Sistema</span>
+    <a class="nav-link {{ 'active' if page_id == 'notificacoes' else '' }}" href="{{ url_for('pagina_notificacoes') }}" {% if page_id == 'notificacoes' %}aria-current="page"{% endif %}><i data-lucide="graduation-cap" aria-hidden="true"></i><span>Tutorial</span></a>
+    <a class="nav-link {{ 'active' if page_id == 'configuracoes' else '' }}" href="{{ url_for('pagina_configuracoes') }}" {% if page_id == 'configuracoes' %}aria-current="page"{% endif %}><i data-lucide="settings" aria-hidden="true"></i><span>Configurações</span></a>
+    {% if usuario_atual and usuario_atual.administrador %}<a class="nav-link {{ 'active' if page_id == 'usuarios' else '' }}" href="{{ url_for('pagina_usuarios') }}" {% if page_id == 'usuarios' %}aria-current="page"{% endif %}><i data-lucide="users" aria-hidden="true"></i><span>Usuários</span></a>{% endif %}
+  </nav>
+
+  <div class="profile">
+    <div class="avatar" aria-hidden="true"><i data-lucide="{{ 'user' if modo_demo else 'user' }}"></i></div>
+    <div class="profile-info"><strong>{{ 'Meu caixa' if modo_demo else (usuario_atual.nome if usuario_atual else 'Usuário') }}</strong><span>{{ 'Dados locais' if modo_demo else ('Administrador' if usuario_atual and usuario_atual.administrador else 'Usuário') }}</span></div>
+    <button class="icon-button" type="button" aria-label="Sair" title="Sair" data-logout><i data-lucide="log-out" aria-hidden="true"></i></button>
+  </div>
+</aside>
+<button class="sidebar-overlay" type="button" aria-label="Fechar menu" aria-hidden="true" tabindex="-1"></button>

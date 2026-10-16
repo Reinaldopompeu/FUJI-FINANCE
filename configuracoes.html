@@ -1,0 +1,103 @@
+{% extends "app_base.html" %}
+{% block title %}Configurações · Caixa Fácil{% endblock %}
+{% block topbar_title %}Configurações{% endblock %}
+{% block topbar_subtitle %}Objetivo e cadastros do sistema{% endblock %}
+{% block head_extra %}<link rel="stylesheet" href="{{ url_for('static', filename='css/settings.css', v='categories') }}" />{% endblock %}
+{% block page_content %}
+<div class="page-shell settings-page">
+  <section class="settings-home" data-settings-home aria-labelledby="settingsHomeTitle">
+    <header class="settings-home-header">
+      <h2 id="settingsHomeTitle">O que você deseja configurar?</h2>
+      <p>Escolha uma seção para consultar ou alterar os dados.</p>
+    </header>
+    <div class="settings-option-grid">
+      <button class="settings-option-card" type="button" data-settings-target="saldo-inicial">
+        <span class="settings-option-icon"><i data-lucide="wallet" aria-hidden="true"></i></span>
+        <span class="settings-option-copy"><strong>Saldo inicial</strong><small>Valor que você já tinha antes dos lançamentos</small></span>
+        <i class="settings-option-arrow" data-lucide="chevron-right" aria-hidden="true"></i>
+      </button>
+      <button class="settings-option-card" type="button" data-settings-target="objetivo">
+        <span class="settings-option-icon"><i data-lucide="target" aria-hidden="true"></i></span>
+        <span class="settings-option-copy"><strong>Valor do objetivo</strong><small>Quanto você quer juntar e quando pode chegar lá</small></span>
+        <i class="settings-option-arrow" data-lucide="chevron-right" aria-hidden="true"></i>
+      </button>
+      <button class="settings-option-card" type="button" data-settings-target="categorias">
+        <span class="settings-option-icon"><i data-lucide="tags" aria-hidden="true"></i></span>
+        <span class="settings-option-copy"><strong>Categorias</strong><small>Organização dos tipos de lançamento</small></span>
+        <i class="settings-option-arrow" data-lucide="chevron-right" aria-hidden="true"></i>
+      </button>
+    </div>
+  </section>
+
+  <div class="settings-stack">
+    <section class="settings-panel" data-settings-panel="saldo-inicial" hidden aria-labelledby="initialPanelTitle">
+      <header class="settings-panel-header">
+        <button class="button button-ghost settings-back" type="button" data-settings-back><i data-lucide="arrow-left" aria-hidden="true"></i>Voltar</button>
+        <div><h2 id="initialPanelTitle">Saldo inicial</h2><p>Defina o valor de partida do Banco Geral.</p></div>
+      </header>
+      <form class="form-section" data-settings-form="saldo-inicial">
+        <div class="form-section-body">
+          <div class="field full"><label for="initialAmount">Saldo inicial</label><div class="input-money"><span class="currency-symbol">R$</span><input class="input" id="initialAmount" name="amount" type="text" inputmode="decimal" data-money-input required aria-describedby="initialHelp" /></div><small class="field-help" id="initialHelp">Informe o valor que já existia antes do primeiro lançamento. Ao salvar, este valor substitui o saldo inicial anterior.</small></div>
+          <p class="form-feedback full" data-settings-feedback role="status"></p>
+        </div>
+        <div class="form-section-footer"><button class="button button-primary" type="submit"><i data-lucide="save" aria-hidden="true"></i>Salvar saldo inicial</button></div>
+      </form>
+    </section>
+    <section class="settings-panel" data-settings-panel="objetivo" hidden aria-labelledby="goalPanelTitle">
+      <header class="settings-panel-header">
+        <button class="button button-ghost settings-back" type="button" data-settings-back><i data-lucide="arrow-left" aria-hidden="true"></i>Voltar</button>
+        <div><h2 id="goalPanelTitle">Valor do objetivo</h2><p>Defina quanto você quer ter de saldo para concluir seu objetivo.</p></div>
+      </header>
+      <form class="form-section" id="objetivo" data-settings-form="objetivo">
+        <div class="form-section-header"><h3>Quanto você quer juntar?</h3></div>
+        <div class="form-section-body">
+          <div class="field full"><label for="goalAmount">Valor do objetivo</label><div class="input-money"><span class="currency-symbol">R$</span><input class="input" id="goalAmount" name="amount" type="text" inputmode="decimal" placeholder="Ex.: 50.000,00" data-money-input required aria-describedby="goalHelp" /></div>
+          <small class="field-help" id="goalHelp">Informe o valor total desejado, e não apenas o que ainda falta.</small></div>
+          <p class="goal-explanation full">O painel estima o prazo com seu saldo atual e a média mensal de entradas menos saídas, considerando apenas os meses com lançamentos. Meses sem movimentações ficam fora da média; meses com saídas também contam. Transferências, lançamentos cancelados e datas futuras não entram no cálculo. A previsão usa o histórico completo, independentemente dos filtros, e arredonda o prazo para cima em meses completos.</p>
+          <p class="form-feedback full" data-settings-feedback role="status"></p>
+        </div>
+        <div class="form-section-footer"><button class="button button-primary" type="submit"><i data-lucide="save" aria-hidden="true"></i>Salvar objetivo</button></div>
+      </form>
+    </section>
+
+    <section class="settings-panel" data-settings-panel="categorias" hidden aria-labelledby="categoriesPanelTitle">
+      <header class="settings-panel-header">
+        <button class="button button-ghost settings-back" type="button" data-settings-back><i data-lucide="arrow-left" aria-hidden="true"></i>Voltar</button>
+        <div><h2 id="categoriesPanelTitle">Categorias</h2><p>Organize as classificações usadas em entradas e saídas.</p></div>
+      </header>
+      <section class="catalog-block" id="cadastros" aria-labelledby="categoriesTitle">
+        <div class="catalog-header"><div><h4 id="categoriesTitle">Categorias</h4></div><span class="count-badge" id="categoryCount" aria-label="Quantidade de categorias">0</span></div>
+        {% if pode_gerenciar %}
+        <form class="catalog-create-grid" id="categoryCreateForm">
+          <div class="field"><label for="newCategoryFlow">Fluxo</label><select class="select" id="newCategoryFlow" name="flow" required><option value="">Selecione</option><option value="entrada">Entrada</option><option value="saida">Saída</option></select></div>
+          <div class="field grow"><label for="newCategoryName">Nome da categoria</label><input class="input" id="newCategoryName" name="name" maxlength="80" placeholder="Ex.: Alimentação" required /></div>
+          <div class="field color-field"><label for="newCategoryColor">Cor</label><input class="input color-input" id="newCategoryColor" name="color" type="color" value="#64748b" /></div>
+          <div class="settings-create-actions"><button class="button button-primary" type="submit"><i data-lucide="plus" aria-hidden="true"></i>Adicionar</button></div>
+        </form>
+        {% endif %}
+        <div class="catalog-list" id="settingsCategoryList" aria-live="polite"><span>Carregando categorias…</span></div>
+      </section>
+    </section>
+
+
+  </div>
+
+  {% if pode_gerenciar %}
+  <div class="modal-backdrop" id="catalogEditModal" aria-hidden="true">
+    <section class="modal category-edit-modal" role="dialog" aria-modal="true" aria-labelledby="catalogEditTitle">
+      <header class="modal-header"><div><h2 id="catalogEditTitle">Editar item</h2></div><button class="icon-button" type="button" data-close-catalog-edit aria-label="Fechar"><i data-lucide="x"></i></button></header>
+      <form id="catalogEditForm">
+        <div class="modal-body">
+          <input type="hidden" name="entity_type" id="catalogEditType" /><input type="hidden" name="id" id="catalogEditId" />
+          <div class="field full"><label for="catalogEditName">Nome</label><input class="input" id="catalogEditName" name="name" maxlength="80" required /></div>
+          <div class="field full" id="catalogEditInitialBalanceField" hidden><label for="catalogEditInitialBalance">Saldo inicial</label><div class="input-money"><span class="currency-symbol">R$</span><input class="input" id="catalogEditInitialBalance" name="initial_balance" type="text" inputmode="decimal" data-money-input /></div><small class="field-help">Alterar este valor recalcula o saldo atual sem criar uma entrada.</small></div>
+          <div class="field full" id="catalogEditColorField"><label for="catalogEditColor">Cor</label><input class="input color-input" id="catalogEditColor" name="color" type="color" /></div>
+          <p class="form-feedback full" data-catalog-edit-feedback role="status"></p>
+        </div>
+        <footer class="modal-footer"><button class="button button-secondary" type="button" data-close-catalog-edit>Cancelar</button><button class="button button-primary" type="submit"><i data-lucide="save"></i>Salvar</button></footer>
+      </form>
+    </section>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

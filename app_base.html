@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="app">
+  {% include "components/sidebar.html" %}
+  <main class="content" id="mainContent">
+    {% if modo_demo %}
+    
+    {% endif %}
+    <header class="topbar">
+      <button class="icon-button sidebar-close" id="sidebarClose" type="button" aria-label="Abrir ou fechar menu" aria-controls="sidebar"><i data-lucide="panel-left" aria-hidden="true"></i></button>
+      <div class="topbar-left"><h1>{% block topbar_title %}Caixa Fácil{% endblock %}</h1><p>{% block topbar_subtitle %}Gestão financeira{% endblock %}</p></div>
+      <div class="topbar-actions">{% block topbar_actions %}<button class="button button-primary" type="button" data-open-transaction><i data-lucide="circle-plus" aria-hidden="true"></i><span>Novo lançamento</span></button>{% endblock %}</div>
+    </header>
+    {% block page_content %}{% endblock %}
+  </main>
+</div>
+{% block transaction_modal %}{% include "components/transaction_modal.html" %}{% endblock %}
+{% include "components/tutorial.html" %}
+{% endblock %}
+{% block scripts %}
+<script defer src="/static/vendor/echarts.min.js" integrity="sha384-C2iskrW/uPW46KzOjrvJIQo4YkV8lkD+QS0CrDN18IIPIpT/g2USu8bTP3nvmIAD" crossorigin="anonymous"></script>
+<script defer src="/static/vendor/jspdf.umd.min.js" integrity="sha384-qovJwSBbRDPP5cEjCp8S0UP66wrvnjaa60XMOGzTNanrThcrGfXfnZkvgY8N1KT3" crossorigin="anonymous"></script>
+<script defer src="/static/vendor/lucide.min.js" integrity="sha384-EUCkRDZz3ccamjWUTnQ+m2+FFO3t+HeuyOgvxU+FsQyXj4M4RxfkwPHtP95OPSmV" crossorigin="anonymous"></script>
+<script defer src="{{ url_for('static', filename='js/dropdown.js', v='20260906-mobile-carousel') }}"></script>
+<script defer src="{{ url_for('static', filename='js/livro-caixa-pdf.js', v='categories') }}"></script>
+<script defer src="{{ url_for('static', filename='js/report-export.js', v='20260909-security-review') }}"></script>
+<script defer src="{{ url_for('static', filename='js/goal.js') }}"></script>
+<script defer src="{{ url_for('static', filename='js/data-service.js', v='categories') }}"></script>
+<script defer src="{{ url_for('static', filename='js/app.js', v='20260923-date-first') }}"></script>
+<script defer src="{{ url_for('static', filename='js/tutorial.js', v='categories') }}"></script>
+{% block app_extra_scripts %}{% endblock %}
+{% endblock %}

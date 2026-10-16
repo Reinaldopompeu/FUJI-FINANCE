@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+const source=fs.readFileSync(new URL('../static/js/demo-session.js',import.meta.url),'utf8');
+const saved=new Map([['caixa-facil.demo.session.v1','demo'],['caixa-facil.tutorial.sandbox.v1','tutorial'],['other','keep']]);
+const document={body:{dataset:{demo:'true'}}};
+let type='navigate';
+const window={performance:{getEntriesByType:()=>[{type}]},sessionStorage:{removeItem:key=>saved.delete(key)}};
+const run=()=>vm.runInNewContext(source,{window,document});
+run(); assert.equal(saved.size,3);
+type='reload';run();assert.deepEqual([...saved],[['other','keep']]);
+saved.set('caixa-facil.demo.session.v1','keep');document.body.dataset.demo='false';run();assert(saved.has('caixa-facil.demo.session.v1'));
+console.log('OK: navigation preserves demo, reload clears demo and tutorial only, authenticated sessions unchanged.');

@@ -1,0 +1,24 @@
+{% extends "app_base.html" %}
+{% block title %}Dashboard · Caixa Fácil{% endblock %}
+{% block topbar_title %}Dashboard{% endblock %}
+{% block topbar_subtitle %}Resumo financeiro e progresso do seu objetivo{% endblock %}
+{% block page_content %}
+<div class="page-shell dashboard-page-shell">
+  <section class="stats-grid" aria-label="Resumo financeiro">
+    <article class="stat-card stat-card-balance"><div class="stat-header"><div class="stat-icon revenue"><i data-lucide="wallet-minimal" aria-hidden="true"></i></div><span class="stat-label">Saldo atual</span></div><div class="balance-with-progress"><strong class="stat-value" data-stat="balance">R$ 0,00</strong><span class="balance-percent" data-goal-percent hidden></span></div></article>
+    <article class="stat-card stat-card-average" title="Média mensal de todas as entradas menos todas as saídas até hoje, considerando os meses com lançamentos de todos os anos, independentemente dos filtros."><div class="stat-header"><div class="stat-icon income"><i data-lucide="arrow-right-left" aria-hidden="true"></i></div><span class="stat-label">Média geral mensal</span></div><strong class="stat-value" data-stat="net-average">R$ 0,00</strong></article>
+    <article class="stat-card stat-card-goal" aria-live="polite">
+      <div class="stat-header"><div class="stat-icon goal"><i data-lucide="target" aria-hidden="true"></i></div><span class="stat-label">Tempo até o objetivo</span></div>
+      <strong class="stat-value goal-value" data-goal-value>Carregando…</strong>
+      <a class="goal-link" href="/configuracoes.html#config-objetivo">Definir objetivo <i data-lucide="arrow-up-right" aria-hidden="true"></i></a>
+    </article>
+  </section>
+
+  <section class="dashboard-grid">
+    <article class="dashboard-card">
+      <div class="card-header balance-chart-header"><div><span class="card-eyebrow">Visão geral</span><select class="chart-view-select" data-dashboard-chart-view aria-label="Visualização do gráfico"><option value="balance">Saldo acumulado</option><option value="cashflow">Entradas e saídas</option></select></div><div class="chart-year-nav" aria-label="Ano do gráfico"><button class="icon-button" type="button" data-chart-year-prev aria-label="Ano anterior"><i data-lucide="chevron-left" aria-hidden="true"></i></button><strong data-chart-year aria-live="polite">2026</strong><button class="icon-button" type="button" data-chart-year-next aria-label="Próximo ano"><i data-lucide="chevron-right" aria-hidden="true"></i></button></div></div>
+      <div id="balanceChart" class="chart chart-lg" role="img" aria-label="Gráfico de saldo acumulado"></div>
+    </article>
+  </section>
+</div>
+{% endblock %}

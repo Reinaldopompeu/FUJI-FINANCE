@@ -1,0 +1,48 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+const real = new Map(), temporary = new Map();
+const storage = map => ({getItem:k=>map.get(k)??null,setItem:(k,v)=>map.set(k,String(v)),removeItem:k=>map.delete(k)});
+const document={body:{dataset:{demo:'true'}},querySelector:()=>null};
+const window={localStorage:storage(real),sessionStorage:storage(temporary)};
+const context=vm.createContext({window,document,Date,Intl,console,URL,Blob,fetch(){throw Error('Unexpected API call')}});
+const source=fs.readFileSync(new URL('../static/js/data-service.js',import.meta.url),'utf8');
+const boot=()=>{vm.runInContext(source,context);return window.AndesData;};
+let data=boot();
+await data.saveSettings('saldo-inicial',{amount:321});
+await data.saveSettings('objetivo',{amount:5000});
+await data.createCategory({name:'Real',flow:'entrada'});
+const before=JSON.stringify([...real]);
+data.beginTutorial();
+assert.equal((await data.listCategories()).length,0);
+await data.saveSettings('saldo-inicial',{amount:999});
+await data.saveSettings('objetivo',{amount:10000});
+const category=await data.createCategory({name:'Treino',flow:'entrada'});
+await data.createTransaction({flow:'entrada',origin_type:'categoria',origin_id:category.id,amount:50,date:'2026-10-16',description:'Somente treino'});
+assert.equal((await data.listBanks())[0].current_balance,1049);
+assert.equal(JSON.stringify([...real]),before);
+data=boot(); // page navigation preserves only the temporary practice
+assert.equal((await data.listTransactions({})).count,1);
+data.endTutorial();
+assert(!temporary.has("caixa-facil.tutorial.sandbox.v1"));
+assert.equal((await data.listBanks())[0].current_balance,321);
+assert.equal((await data.listTransactions({})).count,0);
+assert.equal((await data.getSettings('objetivo')).amount,5000);
+assert.equal((await data.listCategories())[0].name,'Real');
+assert.equal(JSON.stringify([...real]),before);
+// Authenticated mode must use the sandbox too, with no backend writes.
+document.body.dataset.demo='false';data=boot();data.beginTutorial();
+await data.saveSettings('saldo-inicial',{amount:100});
+await data.createCategory({name:'Treino autenticado',flow:'saida'});
+data.endTutorial();
+assert.equal(JSON.stringify([...real]),before);
+console.log('OK: tutorial isolation, navigation, discard, real records preserved and no backend calls.');
+
+document.body.dataset.demo='true';data=boot();
+data.beginTutorial();
+const exit=await data.endDemoSession();
+assert.equal(exit.redirecionar,'/login.html');
+assert(!temporary.has('caixa-facil.demo.session.v1'));
+assert(!temporary.has('caixa-facil.tutorial.sandbox.v1'));
+assert.equal((await data.listBanks())[0].current_balance,0);
+console.log('OK: exit discards demo and tutorial data and returns to login.');

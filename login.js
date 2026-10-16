@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded", () => { window.lucide?.createIcons(); document.getElementById("form-login")?.addEventListener("submit", (event) => { event.preventDefault(); window.sessionStorage.setItem("caixa-facil.tutorial.start", "1"); window.location.assign("/"); }); });

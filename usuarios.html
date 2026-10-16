@@ -1,0 +1,13 @@
+{% extends "app_base.html" %}
+{% block title %}Usuários · Caixa Fácil{% endblock %}
+{% block topbar_title %}Usuários{% endblock %}
+{% block topbar_subtitle %}Acessos e permissões{% endblock %}
+{% block topbar_actions %}<button class="button button-primary" id="openUserModal" type="button"><i data-lucide="user-plus" aria-hidden="true"></i><span>Adicionar usuário</span></button>{% endblock %}
+{% block transaction_modal %}{% endblock %}
+{% block page_content %}
+<div class="page-shell">
+  <section class="table-card"><div class="card-header table-card-header"><div><span class="card-eyebrow">Administração</span><h2>Usuários cadastrados</h2></div><span class="stat-badge neutral" id="totalUsers">Carregando…</span></div><div class="user-grid" id="userList"><div class="table-empty"><span>Carregando usuários…</span></div></div></section>
+</div>
+<div class="modal-backdrop" id="userModal" aria-hidden="true"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="userModalTitle"><header class="modal-header"><div><h2 class="modal-title" id="userModalTitle">Adicionar usuário</h2></div><button class="icon-button" type="button" data-close-user-modal aria-label="Fechar"><i data-lucide="x" aria-hidden="true"></i></button></header><form id="userForm"><div class="modal-body"><div class="field full"><label for="userName">Nome completo</label><input class="input" id="userName" name="nome" minlength="2" maxlength="80" required /></div><div class="field"><label for="userLogin">Usuário</label><input class="input" id="userLogin" name="usuario" minlength="3" maxlength="40" required /></div><div class="field"><label for="userEmail">E-mail</label><input class="input" id="userEmail" name="email" type="email" maxlength="120" required /></div><div class="field full"><label for="userPassword">Senha</label><input class="input" id="userPassword" name="senha" type="password" minlength="12" maxlength="1024" autocomplete="new-password" required /></div><label class="checkbox-row full"><input type="checkbox" name="administrador" /><span>Conceder acesso de administrador</span></label><p class="form-feedback full" id="userFeedback" role="status" aria-live="polite"></p></div><footer class="modal-footer"><button class="button button-secondary" type="button" data-close-user-modal>Cancelar</button><button class="button button-primary" type="submit"><i data-lucide="save" aria-hidden="true"></i>Salvar usuário</button></footer></form></section></div>
+{% endblock %}
+{% block app_extra_scripts %}<script defer src="{{ url_for('static', filename='js/usuarios.js') }}"></script>{% endblock %}

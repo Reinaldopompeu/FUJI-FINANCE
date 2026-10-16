@@ -1,0 +1,26 @@
+{% extends "app_base.html" %}
+{% block title %}Tutorial · Caixa Fácil{% endblock %}
+{% block topbar_title %}Tutorial{% endblock %}
+{% block topbar_subtitle %}Aprenda a configurar e usar seu caixa{% endblock %}
+{% block page_content %}
+<div class="page-shell notifications-layout">
+  <article class="tutorial-notice" id="tutorialNotice" aria-labelledby="tutorialNoticeTitle">
+    <div class="stat-icon revenue"><i data-lucide="graduation-cap" aria-hidden="true"></i></div>
+    <div><span class="card-eyebrow">Comece por aqui</span><h2 id="tutorialNoticeTitle">Conheça as principais funcionalidades</h2><p id="tutorialNoticeStatus">Um passo a passo para configurar e usar o Caixa Fácil.</p></div>
+    <button class="button button-primary" type="button" data-tour-start>Iniciar tutorial</button>
+  </article>
+  <section class="tutorial-reference" aria-label="Manual passo a passo"><h2>Consulte enquanto usa</h2>
+<details class="tutorial-reference-item"><summary>1. Informe o saldo inicial</summary><p>Abra Configurações → Saldo inicial. Digite quanto você já tinha antes de começar a registrar as movimentações e toque em Salvar saldo inicial. Exemplo: se já tinha R$ 1.000, informe 1.000,00. Esse valor entra no saldo e no progresso do objetivo, mas não é uma entrada mensal. Não registre esse mesmo valor como lançamento para evitar contá-lo duas vezes.</p></details>
+<details class="tutorial-reference-item"><summary>2. Crie uma categoria de entrada</summary><p>Abra Categorias. Em Fluxo, escolha Entrada. Digite um nome, como Salário, escolha a cor e toque em Adicionar. A categoria ficará disponível nos lançamentos de entrada.</p></details>
+<details class="tutorial-reference-item"><summary>3. Crie uma categoria de saída</summary><p>Na mesma seção, escolha Saída no campo Fluxo. Informe um nome, como Alimentação ou Transporte, escolha a cor e toque em Adicionar. Cada categoria pertence a um fluxo: as de saída aparecem quando você registra uma despesa.</p></details>
+<details class="tutorial-reference-item"><summary>4. Defina seu objetivo</summary><p>Abra Valor do objetivo. Digite o valor TOTAL que deseja juntar, por exemplo R$ 60.000, e toque em Salvar objetivo. Não informe apenas o que falta. O painel calcula o percentual concluído e o prazo estimado usando esse valor.</p></details>
+<details class="tutorial-reference-item"><summary>5. Comece seu primeiro lançamento</summary><p>Toque em Novo lançamento. Confira a data da movimentação e toque em Continuar. Em Fluxo, escolha Entrada para dinheiro recebido ou Saída para uma despesa. Toque em Continuar.</p></details>
+<details class="tutorial-reference-item"><summary>6. Preencha valor e categoria</summary><p>Informe o valor positivo da movimentação, por exemplo R$ 2.000 para um salário, e continue. Selecione uma categoria do fluxo escolhido, como Salário para Entrada, e continue. Se a lista estiver vazia, feche pelo X e crie a categoria em Configurações antes de tentar novamente.</p></details>
+<details class="tutorial-reference-item"><summary>7. Descreva, revise e confirme</summary><p>Escreva uma descrição curta, como Salário de outubro. Toque em Continuar e confira data, valor, categoria e descrição. Use Voltar para corrigir. Toque em Confirmar para salvar. O X fecha sem salvar; o lançamento só é registrado após a confirmação.</p></details>
+<details class="tutorial-reference-item"><summary>8. Consulte ou exclua lançamentos</summary><p>Na lista, confira entradas, saídas e saldo. O calendário filtra por período; o ícone de categorias filtra a classificação; a lupa busca um lançamento. No celular, deslize a tabela para os lados para ver as colunas. Para remover um registro, toque em Excluir na linha e confirme. O saldo será recalculado.</p></details>
+<details class="tutorial-reference-item"><summary>9. Entenda os indicadores</summary><p>Saldo atual é o saldo inicial mais entradas menos saídas. A porcentagem ao lado mostra quanto do objetivo foi alcançado. A média geral mensal considera entradas menos saídas até hoje, divididas apenas pelos meses com lançamentos de todos os anos. O prazo usa essa média e o valor que ainda falta; sem média positiva, não há previsão.</p></details>
+<details class="tutorial-reference-item"><summary>10. Explore o gráfico</summary><p>Use as setas ao lado do ano para voltar ou avançar. Clique em Saldo acumulado para alternar para Entradas e saídas. Toque no gráfico para consultar os valores do mês. A troca de ano altera o gráfico, mantendo os indicadores gerais do painel.</p></details>
+<details class="tutorial-reference-item"><summary>11. Continue quando precisar</summary><p>Os dados da demonstração são temporários e são apagados ao recarregar a página. Você pode fechar este guia pelo X e retomá-lo aqui. Os exemplos do tutorial são apenas orientações: nenhum valor é salvo automaticamente.</p></details>
+  </section>
+</div>
+{% endblock %}
